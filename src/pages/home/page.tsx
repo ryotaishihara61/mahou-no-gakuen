@@ -170,8 +170,19 @@ export default function Home() {
                 <div className="space-y-3">
                   <p className="text-gray-700 text-sm"><span className="font-medium">発刊：</span>2024年7月</p>
                   <p className="text-gray-700 text-sm">自己受容とセルフラブの大切さを優しく伝える絵本</p>
-                  <div className="bg-blue-100/50 rounded-lg p-3">
+                  <div className="bg-blue-100/50 rounded-lg p-3 mb-3">
                     <p className="text-blue-800 text-xs">小学生でも理解できる優しい言葉で表現</p>
+                  </div>
+                  <div className="pt-2">
+                    <a
+                      href="https://vivian-selflove.site/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-sm font-medium rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    >
+                      <i className="ri-external-link-line mr-2 w-4 h-4"></i>
+                      詳細・お申し込み
+                    </a>
                   </div>
                 </div>
               </div>
@@ -303,8 +314,20 @@ export default function Home() {
             <p className="text-gray-600 text-sm max-w-md mx-auto">
               自己受容・セルフラブを通じて、誰もが輝ける優しい世界を目指しています
             </p>
-            <div className="text-xs text-gray-500">
-              <p>東京都千代田区九段南一丁目5番6号 りそな九段ビル</p>
+            <div className="space-y-2">
+              <div className="text-xs text-gray-500">
+                <p>東京都千代田区九段南一丁目5番6号 りそな九段ビル</p>
+              </div>
+              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                <i className="ri-mail-line w-4 h-4"></i>
+                <span className="font-medium">お問い合わせ：</span>
+                <a
+                  href="mailto:mahounogakuen.21@gmail.com"
+                  className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                >
+                  mahounogakuen.21@gmail.com
+                </a>
+              </div>
             </div>
             <p className="text-gray-400 text-xs pt-4 border-t border-pink-100">
               &copy; 2024 合同会社 魔法の学園. All rights reserved.
