@@ -23,22 +23,48 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Create images directory if not exists
+      - name: Test WebDAV connection
         run: |
+          echo "Testing WebDAV connection..."
+          curl -v -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+               -X OPTIONS \
+               "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/" || true
+
+      - name: Create necessary directories
+        run: |
+          echo "Creating directories..."
           curl -sS -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
                -X MKCOL \
-               "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/assets/images" || true
+               "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/assets/" || true
+          curl -sS -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+               -X MKCOL \
+               "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/assets/images/" || true
 
       - name: Deploy via WebDAV with curl
         run: |
           echo "Listing files to upload:"
           find ./out -type f
 
+          # First upload index.html to test
+          echo "Testing with index.html first..."
+          curl -v -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+               -T "./out/index.html" \
+               "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/index.html"
+
+          # Then upload all files
           find ./out -type f | while read file; do
             remote_path="${file#./out/}"
             echo "Uploading $file to $remote_path"
+
+            # Create directory structure if needed
+            dir_path=$(dirname "$remote_path")
+            if [ "$dir_path" != "." ]; then
+              curl -sS -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+                   -X MKCOL \
+                   "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/$dir_path/" || true
+            fi
+
             response=$(curl -sS -w "%{http_code}" -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
-                 --create-dirs \
                  -T "$file" \
                  "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/$remote_path")
             echo "Upload response: $response"
