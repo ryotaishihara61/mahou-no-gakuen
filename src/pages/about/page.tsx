@@ -130,7 +130,7 @@ export default function About() {
             
             <div className="text-center">
               <img 
-                src="https://readdy.ai/api/search-image?query=Gentle%20workshop%20scene%20with%20women%20in%20circle%20sharing%20and%20supporting%20each%20other%2C%20soft%20natural%20lighting%2C%20cozy%20comfortable%20environment%2C%20personal%20growth%20and%20healing%20atmosphere%2C%20warm%20pastel%20colors%2C%20peaceful%20and%20nurturing%20setting&width=500&height=400&seq=gentle_workshop&orientation=landscape"
+                src="/images/ws-04.jpg"
                 alt="講座・研修風景"
                 className="w-full rounded-2xl shadow-md mb-4"
               />
@@ -197,7 +197,7 @@ export default function About() {
 
             <div className="text-center">
               <img 
-                src="https://readdy.ai/api/search-image?query=Cozy%20children%20book%20reading%20session%20with%20mothers%20and%20children%2C%20warm%20soft%20lighting%2C%20comfortable%20cushions%20and%20blankets%2C%20gentle%20storytelling%20atmosphere%2C%20pastel%20colors%2C%20nurturing%20family%20environment%2C%20peaceful%20and%20loving%20scene&width=600&height=300&seq=gentle_reading&orientation=landscape"
+                src="/images/ws-07.jpg"
                 alt="絵本朗読会の様子"
                 className="w-full max-w-2xl mx-auto rounded-2xl shadow-md mb-4"
               />
@@ -216,7 +216,7 @@ export default function About() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <img 
-                src="https://readdy.ai/api/search-image?query=Gentle%20professional%20Japanese%20woman%20portrait%2C%20warm%20welcoming%20smile%2C%20soft%20natural%20lighting%2C%20elegant%20casual%20attire%2C%20approachable%20and%20nurturing%20appearance%2C%20peaceful%20background%20with%20soft%20pastel%20tones%2C%20feminine%20and%20caring%20expression&width=300&height=400&seq=gentle_ceo&orientation=portrait"
+                src="/images/ran-prof.jpg"
                 alt="代表者 石原 蘭"
                 className="w-48 h-60 object-cover object-top rounded-2xl mx-auto mb-4 shadow-md"
               />

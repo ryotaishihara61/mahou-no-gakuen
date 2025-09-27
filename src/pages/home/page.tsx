@@ -125,8 +125,8 @@ export default function Home() {
             </div>
             
             <div className="text-center">
-              <img 
-                src="https://readdy.ai/api/search-image?query=Gentle%20workshop%20scene%20with%20women%20in%20circle%20sharing%20and%20supporting%20each%20other%2C%20soft%20natural%20lighting%2C%20cozy%20comfortable%20environment%2C%20personal%20growth%20and%20healing%20atmosphere%2C%20warm%20pastel%20colors%2C%20peaceful%20and%20nurturing%20setting&width=500&height=400&seq=gentle_workshop&orientation=landscape"
+              <img
+                src="/images/ws-04.jpg"
                 alt="講座・研修風景"
                 className="w-full rounded-2xl shadow-md mb-4"
               />
@@ -174,6 +174,11 @@ export default function Home() {
                     <p className="text-blue-800 text-xs">小学生でも理解できる優しい言葉で表現</p>
                   </div>
                 </div>
+                <img
+                  src="/images/ws-07.jpg"
+                  alt="セルフラブ活動の様子"
+                  className="w-full rounded-xl shadow-md mt-4"
+                />
               </div>
 
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200">
@@ -211,8 +216,8 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <img 
-                src="https://readdy.ai/api/search-image?query=Gentle%20professional%20Japanese%20woman%20portrait%2C%20warm%20welcoming%20smile%2C%20soft%20natural%20lighting%2C%20elegant%20casual%20attire%2C%20approachable%20and%20nurturing%20appearance%2C%20peaceful%20background%20with%20soft%20pastel%20tones%2C%20feminine%20and%20caring%20expression&width=300&height=400&seq=gentle_ceo&orientation=portrait"
+              <img
+                src="/images/ran-prof.jpg"
                 alt="代表者 石原 蘭"
                 className="w-48 h-60 object-cover object-top rounded-2xl mx-auto mb-4 shadow-md"
               />
