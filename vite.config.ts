@@ -1,15 +1,4 @@
 import { defineConfig } from 'vite'
-<<<<<<< HEAD
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    outDir: 'out',
-    assetsDir: 'assets',
-  }
-})
-=======
 import react from '@vitejs/plugin-react-swc'
 import { resolve } from 'node:path'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -80,6 +69,7 @@ export default defineConfig({
   build: {
     sourcemap: true,
     outDir: 'out',
+    assetsDir: 'assets',
   },
   resolve: {
     alias: {
@@ -91,4 +81,3 @@ export default defineConfig({
     host: '0.0.0.0',
   }
 })
->>>>>>> ffb2709cdd9556f2ca5389e197eb25e13d76a105
