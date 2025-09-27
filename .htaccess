@@ -1,7 +1,7 @@
-# 強制的に HTTPS にリダイレクトする
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+# 強制的に HTTPS にリダイレクトする（一時的に無効化）
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # キャッシュコントロール（任意：静的ファイルのキャッシュを効かせる場合）
 <IfModule mod_expires.c>
