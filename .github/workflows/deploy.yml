@@ -1,0 +1,49 @@
+name: Deploy to Lolipop via WebDAV
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Create images directory if not exists
+        run: |
+          curl -sS -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+               -X MKCOL \
+               "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/assets/images" || true
+
+      - name: Deploy via WebDAV with curl
+        run: |
+          find ./out -type f | while read file; do
+            remote_path="${file#./out/}"
+            echo "Uploading $file to $remote_path"
+            curl -sS -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+                 --create-dirs \
+                 -T "$file" \
+                 "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/$remote_path"
+          done
+
+          if [ -f ".htaccess" ]; then
+            echo "Uploading .htaccess"
+            curl -sS -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+                 -T ".htaccess" \
+                 "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/.htaccess"
+          fi
+

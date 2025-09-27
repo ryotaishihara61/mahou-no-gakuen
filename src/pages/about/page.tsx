@@ -196,8 +196,8 @@ export default function About() {
             </div>
 
             <div className="text-center">
-              <img 
-                src="https://readdy.ai/api/search-image?query=Cozy%20children%20book%20reading%20session%20with%20mothers%20and%20children%2C%20warm%20soft%20lighting%2C%20comfortable%20cushions%20and%20blankets%2C%20gentle%20storytelling%20atmosphere%2C%20pastel%20colors%2C%20nurturing%20family%20environment%2C%20peaceful%20and%20loving%20scene&width=600&height=300&seq=gentle_reading&orientation=landscape"
+              <img
+                src="/images/ws-07.jpg"
                 alt="絵本朗読会の様子"
                 className="w-full max-w-2xl mx-auto rounded-2xl shadow-md mb-4"
               />
