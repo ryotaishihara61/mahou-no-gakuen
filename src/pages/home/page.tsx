@@ -174,11 +174,6 @@ export default function Home() {
                     <p className="text-blue-800 text-xs">小学生でも理解できる優しい言葉で表現</p>
                   </div>
                 </div>
-                <img
-                  src="/images/ws-07.jpg"
-                  alt="セルフラブ活動の様子"
-                  className="w-full rounded-xl shadow-md mt-4"
-                />
               </div>
 
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200">
