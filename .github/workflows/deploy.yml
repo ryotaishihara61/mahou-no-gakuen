@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -31,13 +31,17 @@ jobs:
 
       - name: Deploy via WebDAV with curl
         run: |
+          echo "Listing files to upload:"
+          find ./out -type f
+
           find ./out -type f | while read file; do
             remote_path="${file#./out/}"
             echo "Uploading $file to $remote_path"
-            curl -sS -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+            response=$(curl -sS -w "%{http_code}" -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
                  --create-dirs \
                  -T "$file" \
-                 "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/$remote_path"
+                 "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/$remote_path")
+            echo "Upload response: $response"
           done
 
           if [ -f ".htaccess" ]; then
