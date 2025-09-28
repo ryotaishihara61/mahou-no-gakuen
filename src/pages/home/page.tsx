@@ -21,7 +21,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative py-12 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{
@@ -41,7 +41,7 @@ export default function Home() {
       </section>
 
       {/* Main Content */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12">
         
         {/* Basic Information */}
         <section className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-lg p-8 border border-pink-100">
