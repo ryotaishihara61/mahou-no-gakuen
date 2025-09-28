@@ -128,13 +128,28 @@ export default function About() {
               </div>
             </div>
             
-            <div className="text-center">
-              <img 
-                src="/images/ws-04.jpg"
-                alt="講座・研修風景"
-                className="w-full rounded-2xl shadow-md mb-4"
-              />
-              <p className="text-gray-600 text-sm">参加者の皆様と共に学び、成長する貴重な時間</p>
+            <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="relative group">
+                  <img
+                    src="/images/slrev-01.jpg"
+                    alt="自己愛革命講座の様子"
+                    className="w-full h-48 object-cover rounded-2xl shadow-md transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div className="relative group">
+                  <img
+                    src="/images/slrev-02.jpg"
+                    alt="人生変革サポートの現場"
+                    className="w-full h-48 object-cover rounded-2xl shadow-md transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </div>
+              <div className="text-center">
+                <p className="text-gray-600 text-sm">参加者の皆様と共に学び、成長する貴重な時間</p>
+              </div>
             </div>
           </div>
         </section>
@@ -174,8 +189,19 @@ export default function About() {
                 <div className="space-y-3">
                   <p className="text-gray-700 text-sm"><span className="font-medium">発刊：</span>2024年7月</p>
                   <p className="text-gray-700 text-sm">自己受容とセルフラブの大切さを優しく伝える絵本</p>
-                  <div className="bg-blue-100/50 rounded-lg p-3">
+                  <div className="bg-blue-100/50 rounded-lg p-3 mb-3">
                     <p className="text-blue-800 text-xs">小学生でも理解できる優しい言葉で表現</p>
+                  </div>
+                  <div className="pt-2">
+                    <a
+                      href="https://selflovelab.base.shop/items/87374284"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-sm font-medium rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    >
+                      <i className="ri-shopping-cart-line mr-2 w-4 h-4"></i>
+                      購入ページ
+                    </a>
                   </div>
                 </div>
               </div>
@@ -183,25 +209,51 @@ export default function About() {
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200">
                 <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                   <i className="ri-mic-line text-green-500 mr-2 w-5 h-5 flex items-center justify-center"></i>
-                  『ビビアン』朗読会
+                  『ビビアン』朗読ワーク
                 </h3>
                 <div className="space-y-3">
                   <p className="text-gray-700 text-sm"><span className="font-medium">開始：</span>2024年8月</p>
-                  <p className="text-gray-700 text-sm">参加型朗読会</p>
-                  <div className="bg-green-100/50 rounded-lg p-3">
+                  <p className="text-gray-700 text-sm">参加型朗読ワーク</p>
+                  <div className="bg-green-100/50 rounded-lg p-3 mb-3">
                     <p className="text-green-800 text-xs">親子で一緒にセルフラブについて学べる機会</p>
+                  </div>
+                  <div className="pt-2">
+                    <a
+                      href="https://vivian-selflove.site/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-medium rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    >
+                      <i className="ri-external-link-line mr-2 w-4 h-4"></i>
+                      詳細・お申し込み
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="text-center">
-              <img
-                src="/images/ws-07.jpg"
-                alt="絵本朗読会の様子"
-                className="w-full max-w-2xl mx-auto rounded-2xl shadow-md mb-4"
-              />
-              <p className="text-gray-600 text-sm">『ビビアン』の朗読会で温かい時間を共有</p>
+            <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="relative group">
+                  <img
+                    src="/images/ws-04.jpg"
+                    alt="セルフラブ絵本『ビビアン』の活動"
+                    className="w-full h-48 object-cover rounded-2xl shadow-md transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div className="relative group">
+                  <img
+                    src="/images/ws-07.jpg"
+                    alt="絵本朗読ワークの様子"
+                    className="w-full h-48 object-cover rounded-2xl shadow-md transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </div>
+              <div className="text-center">
+                <p className="text-gray-600 text-sm">『ビビアン』の朗読ワークで温かい時間を共有</p>
+              </div>
             </div>
           </div>
         </section>
