@@ -306,7 +306,7 @@ export default function Home() {
                   著書・出版実績
                 </h4>
                 <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
-                  <h5 className="font-semibold text-gray-800 mb-2 text-sm">『食事は、最強のビジネス戦略だ』</h5>
+                  <h5 className="font-semibold text-gray-800 mb-2 text-sm">『食事は、最強のビジネス戦略である』</h5>
                   <p className="text-gray-600 text-xs mb-2">2013年 大和書房より出版</p>
                   <p className="text-gray-700 text-xs mb-2">日経ビジネス書評に掲載され、高い評価を獲得</p>
                   <p className="text-purple-800 text-xs">
