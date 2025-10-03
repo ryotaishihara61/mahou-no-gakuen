@@ -37,7 +37,7 @@ export default function Home() {
   useEffect(() => {
     const fetchBlogPosts = async () => {
       try {
-        console.log('RSSフィードの取得を開始...');
+        console.log('RSSフィードの取得を開始します...');
 
         // 開発環境ではViteプロキシ、本番環境ではCORSプロキシを使用
         const isDev = import.meta.env.DEV;
