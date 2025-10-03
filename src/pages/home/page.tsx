@@ -38,7 +38,15 @@ export default function Home() {
     const fetchBlogPosts = async () => {
       try {
         console.log('RSSフィードの取得を開始...');
-        const response = await fetch('/api/rss');
+
+        // 開発環境ではViteプロキシ、本番環境ではCORSプロキシを使用
+        const isDev = import.meta.env.DEV;
+        const rssUrl = isDev
+          ? '/api/rss'
+          : 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://note.com/ran_ishihara/rss');
+
+        console.log('Fetching from:', rssUrl);
+        const response = await fetch(rssUrl);
         console.log('Response status:', response.status);
 
         if (!response.ok) {
@@ -458,7 +466,7 @@ export default function Home() {
         {/* Blog Section */}
         <section className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-lg p-8 border border-pink-100">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-3">ブログ</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-3">Blog</h2>
             <div className="w-16 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto rounded-full"></div>
             <p className="text-gray-600 text-sm mt-4">セルフラブ、SEL教育について発信しています</p>
           </div>
