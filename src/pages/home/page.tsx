@@ -1,7 +1,123 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+interface BlogPost {
+  title: string;
+  link: string;
+  description: string;
+  pubDate: string;
+  imageUrl: string;
+}
 
 export default function Home() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // 画像マッピング: 記事タイトルと画像ファイル名を関連付け
+  const imageMapping: { [key: string]: string } = {
+    '声を失って気づいたこと、カンボジアで取り戻した生きる力': 'blog_001.jpg'
+  };
+
+  // デフォルト画像を循環使用
+  const getDefaultImage = (index: number): string => {
+    const defaultImageNum = (index % 6) + 1;
+    return `https://readdy.ai/api/search-image?query=Soft%20watercolor%20blog%20illustration%2C%20gentle%20pastel%20colors%2C%20self-love%20theme%2C%20peaceful%20atmosphere&width=800&height=600&seq=blog-default-${defaultImageNum}&orientation=landscape`;
+  };
+
+  // 画像URLを取得
+  const getImageUrl = (title: string, index: number): string => {
+    // カスタム画像マッピングをチェック
+    if (imageMapping[title]) {
+      return `/images/blog/${imageMapping[title]}`;
+    }
+    // デフォルト画像を返す
+    return getDefaultImage(index);
+  };
+
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        console.log('RSSフィードの取得を開始...');
+        const response = await fetch('/api/rss');
+        console.log('Response status:', response.status);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const xmlText = await response.text();
+        console.log('XML text received, length:', xmlText.length);
+
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlText, 'text/xml');
+        console.log('XML parsed');
+
+        const items = xml.querySelectorAll('item');
+        console.log('Items found:', items.length);
+
+        if (items.length === 0) {
+          throw new Error('No items found in RSS feed');
+        }
+
+        const posts: BlogPost[] = Array.from(items).slice(0, 6).map((item, index) => {
+          const title = item.querySelector('title')?.textContent || '';
+          const link = item.querySelector('link')?.textContent || '';
+          const descriptionElement = item.querySelector('description');
+          let description = descriptionElement?.textContent || '';
+
+          // HTMLタグを除去
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = description;
+          description = tempDiv.textContent || tempDiv.innerText || '';
+
+          console.log(`Post ${index}:`, { title, link, description: description.substring(0, 50) });
+
+          // 説明文を100文字に制限
+          const truncatedDescription = description.length > 100
+            ? description.substring(0, 100) + '…'
+            : description;
+
+          const pubDateText = item.querySelector('pubDate')?.textContent || '';
+          const pubDate = pubDateText ? new Date(pubDateText).toLocaleDateString('ja-JP', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }) : '';
+
+          return {
+            title,
+            link,
+            description: truncatedDescription,
+            pubDate,
+            imageUrl: getImageUrl(title, index)
+          };
+        });
+
+        console.log('Posts created:', posts.length);
+        setBlogPosts(posts);
+      } catch (error) {
+        console.error('ブログ記事の取得に失敗しました:', error);
+        // エラー時はサンプル記事を表示
+        const samplePosts: BlogPost[] = Array.from({ length: 6 }, (_, i) => ({
+          title: `セルフラブについての記事 ${i + 1}`,
+          link: 'https://note.com/ran_ishihara',
+          description: '自己受容とセルフラブの大切さについて綴っています。自分を愛することから始まる優しい世界について…',
+          pubDate: new Date().toLocaleDateString('ja-JP', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }),
+          imageUrl: getDefaultImage(i)
+        }));
+        setBlogPosts(samplePosts);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBlogPosts();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-purple-50">
       {/* Header */}
@@ -272,9 +388,9 @@ export default function Home() {
               <p className="text-gray-600 text-sm">合同会社 魔法の学園 代表</p>
               <p className="text-gray-500 text-xs mt-1">自己受容・セルフラブの専門家</p>
               <div className="mt-3">
-                <a 
-                  href="https://www.instagram.com/ranishihara/" 
-                  target="_blank" 
+                <a
+                  href="https://www.instagram.com/ranishihara/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full hover:from-pink-600 hover:to-purple-600 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
                 >
@@ -282,7 +398,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            
+
             <div className="md:col-span-2 space-y-6">
               <div>
                 <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
@@ -336,6 +452,77 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Blog Section */}
+        <section className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-lg p-8 border border-pink-100">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-800 mb-3">ブログ</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto rounded-full"></div>
+            <p className="text-gray-600 text-sm mt-4">セルフラブ、SEL教育について発信しています</p>
+          </div>
+
+          {isLoading ? (
+            <div className="flex items-center justify-center py-16">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500"></div>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {blogPosts.map((post, index) => (
+                <a
+                  key={index}
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={post.imageUrl}
+                      alt={post.title}
+                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                      onError={(e) => {
+                        // 画像読み込み失敗時のフォールバック
+                        const target = e.target as HTMLImageElement;
+                        target.src = getDefaultImage(index);
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="p-5 space-y-3">
+                    <h3 className="font-bold text-gray-800 text-base line-clamp-2 group-hover:text-pink-600 transition-colors duration-300">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm line-clamp-3">
+                      {post.description}
+                    </p>
+                    <div className="flex items-center justify-between text-xs text-gray-500 pt-2 border-t border-gray-100">
+                      <span className="flex items-center">
+                        <i className="ri-calendar-line mr-1 w-4 h-4"></i>
+                        {post.pubDate}
+                      </span>
+                      <span className="flex items-center text-pink-500 group-hover:text-pink-700 transition-colors duration-300">
+                        続きを読む
+                        <i className="ri-arrow-right-line ml-1 w-4 h-4"></i>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-8">
+            <a
+              href="https://note.com/ran_ishihara"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-medium rounded-full hover:from-pink-600 hover:to-purple-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            >
+              <i className="ri-article-line mr-2 w-5 h-5"></i>
+              すべての記事を見る
+            </a>
           </div>
         </section>
       </main>

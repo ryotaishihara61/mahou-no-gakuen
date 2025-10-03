@@ -79,5 +79,12 @@ export default defineConfig({
   server: {
     port: 3000,
     host: '0.0.0.0',
+    proxy: {
+      '/api/rss': {
+        target: 'https://note.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/rss/, '/ran_ishihara/rss'),
+      }
+    }
   }
 })
