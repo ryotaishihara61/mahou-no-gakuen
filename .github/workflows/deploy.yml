@@ -43,6 +43,18 @@ jobs:
                -X MKCOL \
                "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/assets/images/" || true
 
+      - name: Clean old assets on server
+        run: |
+          echo "Cleaning old JS files..."
+          # List and delete old index-*.js files
+          curl -X PROPFIND -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+               "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/assets/" \
+               --header "Depth: 1" 2>&1 | grep -o 'index-[^<]*\.js' | while read oldfile; do
+            echo "Deleting old file: $oldfile"
+            curl -X DELETE -u "${{ secrets.WEBDAV_USER }}:${{ secrets.WEBDAV_PASS }}" \
+                 "https://staba-mahounogakuen.webdav-lolipop.jp/mahounogakuen/assets/$oldfile" || true
+          done
+
       - name: Deploy via WebDAV with curl
         run: |
           echo "Listing files to upload:"
