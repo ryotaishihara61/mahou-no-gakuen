@@ -39,11 +39,8 @@ export default function Home() {
       try {
         console.log('RSSフィードの取得を開始します...');
 
-        // 開発環境ではViteプロキシ、本番環境ではCORSプロキシを使用
-        const isDev = import.meta.env.DEV;
-        const rssUrl = isDev
-          ? '/api/rss'
-          : 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://note.com/ran_ishihara/rss');
+        // CORSプロキシを使用してRSSを取得
+        const rssUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://note.com/ran_ishihara/rss');
 
         console.log('Fetching from:', rssUrl);
         const response = await fetch(rssUrl);
